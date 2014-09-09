@@ -10,4 +10,8 @@ The user front end is encapsulated in the phonedir.html file with the backend qu
 
 ![Phone directory example image](http://www.pixelcoder.pw/demo/phonedir/screenshot.png)
 
+<<<<<<< HEAD
 A working example can be found here: [Phone Directory](http://www.pixelcoder.pw/demo/phonedir/phonedir.html)
+=======
+A working example can be found here: [Phone Directory](http://www.pixelcoder.pw/demo/phonedir/phonedir.html)
+>>>>>>> origin/master
