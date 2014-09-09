@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">--> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>University Phone Directory</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link rel="stylesheet" type="text/css" href="phonedir.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="script/jquery.ba-throttle-debounce.js"></script>
+  <script type="text/javascript">
+    $(function() {
+        $("#searchBox").keyup($.debounce (250,function(e) {
+            var searchString    = $("#searchBox").val();
+            var data            = 'search='+ searchString;
+    	if (e.keyCode != 16) {
+            if(searchString) {
+                $.ajax({
+                    type: "POST",
+                    url: "phoneresults.php",
+                    data: data,
+                    beforeSend: function(html) {
+                        $("#results").html('');
+                        $("#searchresults").show();
+                        $(".word").html(searchString);
+                   },
+                   success: function(html){
+                        $("#results").show();
+                        $("#results").append(html);
+                  }
+                });
+            }
+    	}
+            return false;
+        }));
+    });
+  </script>
+</head>
+
+  <body>
+    <div id="container">
+    	<div class="conBox" align="center" id="sForm">
+    		<form action="phoneresults.php" method="post" id="searchbox" onsubmit="return false;">
+        		<input type="text" name="search" id="searchBox" class='searchBox' autofocus tabindex="1">
+		<script>
+      			if (!("autofocus" in document.createElement("input"))) {
+      				document.getElementById("searchBox").focus();
+      			}
+    		</script>
+
+    		</form>
+    	</div>
+    </div>
+    <div id="searchresults" style="margin: 0 auto">Search results for: <span class="word"></span>
+	<img src="images/bluebar.png" width="100%" height="2" class="bar">
+    </div>
+    <div class="center">
+    	<table width="100%" border="0" align="left" cellspacing="3" class="update" id="results">
+    	</table>
+    </div>
+  </body>
+</html>
